@@ -64,12 +64,9 @@ def popular_articles():
             "lang": row['lang'],
             "total_events": row['total_events']
         }
-        article_info.append(_d)
-
-    return jsonify({
-        "data": article_info,
-        "status": "success"
-    })
+        
+     #do the remaining part here
+        
 
 @app.route("/recommended-articles")
 def recommend_articles():
@@ -77,11 +74,10 @@ def recommend_articles():
     col_names=['url', 'title', 'text', 'lang', 'total_events']
     all_recommended = pd.DataFrame(columns=col_names)
     
-    for article in liked_articles:
-        output = get_recommendations(article["contentId"])
-        all_recommended=all_recommended.append(output)
-
-    all_recommended.drop_duplicates(subset=["title"],inplace=True)
+    #run a loop on liked articles to get reccomendations
+    
+    
+    #remove the duplicate values
 
     recommended_data = []
 
@@ -95,10 +91,7 @@ def recommend_articles():
         }
         recommended_data.append(_d)
 
-    return jsonify({
-        "data":recommended_data,
-        "status": "success"
-    })
+    #return json structure
 
 
 if __name__ == "__main__":
